@@ -63,6 +63,9 @@ class Calculator {
                 this.processClearCurrentOperation();
                 this.processClearPreviousOperation();
                 break;
+            case "=":
+                this.processEqualOperator();
+                break;
             default:
                 return;
         }
@@ -113,6 +116,12 @@ class Calculator {
     // Limpa a operação anterior
     processClearPreviousOperation() {
         this.previousOperationText.innerText = "";
+    }
+
+    // Retorna o resultado da operação
+    processEqualOperator() {
+        const operation = previousOperationText.innerText.split(" ")[1];
+        this.processOperation(operation);
     }
 }
 
