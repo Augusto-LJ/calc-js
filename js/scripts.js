@@ -22,6 +22,15 @@ class Calculator {
 
     // Processa as operações da calculadora
     processOperation(operation) {
+        // Checa se o valor atual está vazio
+        if(currentOperationText.innerText === "") {
+            // Muda a operação
+            if(this.previousOperationText.innerText !== "") {
+                this.changeOperation(operation);
+            }
+            return;
+        }
+
         // Pega o valor atual e o valor anterior
         let operationValue;
         const previous = +this.previousOperationText.innerText.split(" ")[0];
@@ -56,7 +65,6 @@ class Calculator {
         current = null,
         previous = null
         ) {
-            console.log(operationValue, operation, current, previous);
             if(operationValue === null){
                 this.currentOperationText.innerText += this.currentOperation;
             } else {
@@ -69,6 +77,17 @@ class Calculator {
                 this.previousOperationText.innerText = `${operationValue} ${operation}`;
                 this.currentOperationText.innerText = "";
             }
+    }
+
+    // Altera a operação matemática
+    changeOperation(operation){
+        const MathOperations = ["*", "/", "+", "-"]
+
+        if(!MathOperations.includes(operation)){
+            return;
+        }
+
+        this.previousOperationText.innerText = this.previousOperationText.innerText.slice(0, -1) + operation;
     }
 }
 
